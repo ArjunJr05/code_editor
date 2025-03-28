@@ -62,7 +62,8 @@ class _StudentScreenState extends State<StudentScreen>
   List<String> _questionCodes = []; // Stores code for each question
 
   // Timer variables
-  Duration _remainingTime = const Duration(minutes: 30);
+  // Timer variables
+  Duration _remainingTime = const Duration(minutes: 90); // Already correct
   Timer? _countdownTimer;
   bool _timeExpired = false;
 
@@ -183,7 +184,7 @@ class _StudentScreenState extends State<StudentScreen>
       };
 
       // Calculate duration in minutes (30 - remaining minutes)
-      final durationMinutes = 30 - _remainingTime.inMinutes;
+      final durationMinutes = 90 - _remainingTime.inMinutes;
 
       // Insert into the results table
       await supabase.from('results').insert({
@@ -193,7 +194,7 @@ class _StudentScreenState extends State<StudentScreen>
         'total_marks': _totalQuestions,
         'malpractice_count': _malpracticeCount,
         'is_malpractice': _malpracticeCount > 0,
-        'duration_minutes': 30 - _remainingTime.inMinutes,
+        'duration_minutes': 90 - _remainingTime.inMinutes,
         'language_used': _currentLanguage,
         'grading_notes': '', // Can be filled by instructor later
         'is_submitted': true,
@@ -417,7 +418,7 @@ class _StudentScreenState extends State<StudentScreen>
       if (_lastInteractionTime == null || !_isTestActive) return;
 
       final inactiveDuration = DateTime.now().difference(_lastInteractionTime!);
-      if (inactiveDuration.inSeconds > 30) {
+      if (inactiveDuration.inSeconds > 90) {
         _handleMalpractice();
       }
     });
@@ -737,7 +738,7 @@ Test Case 2: <output>
               ),
               const SizedBox(height: 8),
               Text(
-                'Time Taken: ${30 - _remainingTime.inMinutes} minutes',
+                'Time Taken: ${90 - _remainingTime.inMinutes} minutes',
                 style: const TextStyle(
                   fontSize: 20,
                 ),
@@ -767,6 +768,7 @@ Test Case 2: <output>
     }
 
     List<Widget> actions = [
+      // In your actions list, update the timer display:
       Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Container(
