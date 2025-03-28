@@ -63,7 +63,7 @@ class _StudentScreenState extends State<StudentScreen>
 
   // Timer variables
   // Timer variables
-  Duration _remainingTime = const Duration(minutes: 90); // Already correct
+  Duration _remainingTime = Duration(minutes: 1800); // Already correct
   Timer? _countdownTimer;
   bool _timeExpired = false;
 
